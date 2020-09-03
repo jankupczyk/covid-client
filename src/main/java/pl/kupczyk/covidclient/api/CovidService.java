@@ -23,16 +23,13 @@ public class CovidService {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM-dd-yyyy");
         url = url + date.format(formatter) + ".csv";
 
-        System.out.println(url);
-
         return url;
     }
 
     public void map() throws FileNotFoundException {
-        CsvToBeanBuilder<CovidData> builder = new CsvToBeanBuilder<CovidData>(new InputStreamReader(new FileInputStream(generateFile())));
+        CsvToBeanBuilder<CovidData> builder = new CsvToBeanBuilder<>(new InputStreamReader(new FileInputStream(generateFile())));
 
         builder.withType(CovidData.class);
-        builder.build().parse().forEach(i -> i.toString());
-
+        builder.build().parse().forEach(Object::toString);
     }
 }

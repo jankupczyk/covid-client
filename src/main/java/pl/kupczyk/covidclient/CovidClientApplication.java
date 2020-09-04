@@ -11,7 +11,6 @@ public class CovidClientApplication {
 		SpringApplication.run(CovidClientApplication.class, args);
 
 		CovidService service = new CovidService();
-		service.generateFile();
+		System.out.print(service.downloadData().getData().get(0).getConfirmed());
 	}
-
 }

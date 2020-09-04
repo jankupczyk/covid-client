@@ -12,6 +12,10 @@ public class CovidController {
 
     public final CovidService service;
 
+    public CovidController() {
+        service = new CovidService();
+    }
+
     @RequestMapping("covid")
     public String getData(Model model){
         model.addAttribute("service", service);

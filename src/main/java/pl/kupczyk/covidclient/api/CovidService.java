@@ -7,6 +7,9 @@ import pl.kupczyk.covidclient.model.CovidData;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
@@ -30,6 +33,10 @@ public class CovidService {
         CovidData list = restTemplate.getForObject(URL, CovidData.class);
 
         return list;
+    }
+
+    public List<int> getConfirmed(){
+
     }
 
 }

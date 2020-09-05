@@ -1,12 +1,12 @@
 package pl.kupczyk.covidclient.model;
 
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
-@RequiredArgsConstructor
+@NoArgsConstructor
 public class Data {
     private String date;
     private int confirmed;

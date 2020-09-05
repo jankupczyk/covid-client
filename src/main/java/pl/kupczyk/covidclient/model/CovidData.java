@@ -1,14 +1,14 @@
 package pl.kupczyk.covidclient.model;
 
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.List;
 
 @Getter
 @Setter
-@RequiredArgsConstructor
+@NoArgsConstructor
 public class CovidData {
     private List<Data> data;
 }

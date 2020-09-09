@@ -4,9 +4,12 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import pl.kupczyk.covidclient.model.CovidData;
+import pl.kupczyk.covidclient.model.Data;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -25,15 +28,16 @@ public class CovidService {
         return url;
     }
 
-    public CovidData downloadData(){
+    public List<Data> downloadData(){
         RestTemplate restTemplate = new RestTemplate();
         CovidData list = restTemplate.getForObject(URL, CovidData.class);
 
-        return list;
+        return list.getData();
     }
 
-    public List<int> getConfirmed(){
-
+    public List<Integer> getConfirmed(){
+        return downloadData().stream().map(Data::getConfirmed)
+                .collect(Collectors.toList());
     }
 
 }

@@ -10,8 +10,10 @@ import pl.kupczyk.covidclient.model.Region;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 @Service
 @RequiredArgsConstructor
@@ -42,11 +44,22 @@ public class CovidService {
                 .collect(Collectors.toList());
     }
 
-    public List<String> getIso(){
-        List<Region> list = (List<Region>) downloadData().get(0).getRegion();
-
-        return list.stream().map(Region::getIso)
+    public List<String> getCountryIso(){
+        return downloadData().stream().map(Data::getRegion)
+                .collect(Collectors.toList())
+                .stream()
+                .map(Region::getIso)
                 .collect(Collectors.toList());
+    }
+
+    public List<Integer> getDeaths(){
+        return downloadData().stream().map(Data::getDeaths)
+                .collect(Collectors.toList());
+    }
+
+    public Map<String, Integer> getInfectionCityRate(){
+        return IntStream.range(0, getCountryIso().size()).boxed()
+                .collect(Collectors.toMap(getCountryIso()::get, getConfirmed()::get));
     }
 
 }

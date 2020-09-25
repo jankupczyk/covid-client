@@ -44,16 +44,16 @@ public class CovidService {
                 .collect(Collectors.toList());
     }
 
+    public List<Integer> getDeaths(){
+        return downloadData().stream().map(Data::getDeaths)
+                .collect(Collectors.toList());
+    }
+
     public List<String> getCountryIso(){
         return downloadData().stream().map(Data::getRegion)
                 .collect(Collectors.toList())
                 .stream()
                 .map(Region::getIso)
-                .collect(Collectors.toList());
-    }
-
-    public List<Integer> getDeaths(){
-        return downloadData().stream().map(Data::getDeaths)
                 .collect(Collectors.toList());
     }
 

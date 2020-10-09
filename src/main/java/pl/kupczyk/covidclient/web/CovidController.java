@@ -1,11 +1,11 @@
-package pl.kupczyk.covidclient.api;
+package pl.kupczyk.covidclient.web;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+@RestController
 @RequestMapping("api")
 @RequiredArgsConstructor
 public class CovidController {
@@ -19,7 +19,13 @@ public class CovidController {
     @RequestMapping("covid")
     public String getData(Model model){
         model.addAttribute("service", service);
+
         return "index";
+    }
+
+    @RequestMapping("deaths")
+    public Integer getData(){
+        return service.utils.listSum(service.getDeaths());
     }
 
 }

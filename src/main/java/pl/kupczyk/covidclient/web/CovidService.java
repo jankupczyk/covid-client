@@ -14,26 +14,23 @@ import java.util.stream.IntStream;
 @Service
 @RequiredArgsConstructor
 public class CovidService {
-
-    DataUtils utils = new DataUtils();
-
     public List<Integer> getConfirmed(){
-        return utils.downloadData().stream().map(Data::getConfirmed)
+        return DataUtils.downloadData().stream().map(Data::getConfirmed)
                 .collect(Collectors.toList());
     }
 
     public List<Integer> getDeaths(){
-        return utils.downloadData().stream().map(Data::getDeaths)
+        return DataUtils.downloadData().stream().map(Data::getDeaths)
                 .collect(Collectors.toList());
     }
 
     public List<Integer> getRecovered(){
-        return utils.downloadData().stream().map(Data::getRecovered)
+        return DataUtils.downloadData().stream().map(Data::getRecovered)
                 .collect(Collectors.toList());
     }
 
     public List<String> getCountryIso(){
-        return utils.downloadData().stream().map(Data::getRegion)
+        return DataUtils.downloadData().stream().map(Data::getRegion)
                 .collect(Collectors.toList())
                 .stream()
                 .map(Region::getIso)
@@ -41,7 +38,7 @@ public class CovidService {
     }
 
     public List<String> getDateAsAt(){
-        return utils.downloadData().stream().map(Data::getLast_update)
+        return DataUtils.downloadData().stream().map(Data::getLast_update)
                 .collect(Collectors.toList());
     }
 

@@ -4,6 +4,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import pl.kupczyk.covidclient.utils.DataUtils;
+
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @RestController
 @RequestMapping("api")
@@ -24,8 +29,9 @@ public class CovidController {
     }
 
     @RequestMapping("deaths")
-    public Integer getData(){
-        return service.utils.listSum(service.getDeaths());
+    public List<Integer> totalSum(){
+        return Stream.of(DataUtils.total(service.getDeaths()), DataUtils.total(service.getConfirmed()), DataUtils.total(service.getConfirmed()))
+                .collect(Collectors.toList());
     }
 
 }

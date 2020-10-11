@@ -13,7 +13,7 @@ public class DataUtils {
 
     public static final String URL = "https://covid-api.com/api/reports";
 
-    public String generateFile(){
+    public static String generateFile(){
         String url = "https://raw.githubusercontent.com/" +
                 "CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports/";
 
@@ -24,14 +24,14 @@ public class DataUtils {
         return url;
     }
 
-    public List<Data> downloadData(){
+    public static List<Data> downloadData(){
         RestTemplate restTemplate = new RestTemplate();
         CovidData list = restTemplate.getForObject(URL, CovidData.class);
 
         return Objects.requireNonNull(list).getData();
     }
 
-    public Integer listSum(List<Integer> list){
+    public static Integer total(List<Integer> list){
         return list.stream().mapToInt(Integer::intValue).sum();
     }
 

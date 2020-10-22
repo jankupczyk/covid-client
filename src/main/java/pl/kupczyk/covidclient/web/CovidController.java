@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 import pl.kupczyk.covidclient.utils.DataUtils;
 
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -28,10 +29,17 @@ public class CovidController {
         return "index";
     }
 
-    @RequestMapping("deaths")
+    @RequestMapping("total")
     public List<Integer> totalSum(){
-        return Stream.of(DataUtils.total(service.getDeaths()), DataUtils.total(service.getConfirmed()), DataUtils.total(service.getConfirmed()))
+        return Stream.of(DataUtils.total(service.getDeaths()), DataUtils.total(service.getConfirmed()), DataUtils.total(service.getRecovered()))
                 .collect(Collectors.toList());
+    }
+
+    @RequestMapping("total2")
+    public Map<String, Integer> totalSum2(){
+        return Map.of("deaths", DataUtils.total(service.getDeaths()),
+                "confirmed", DataUtils.total(service.getConfirmed()),
+                "recovered", DataUtils.total(service.getRecovered()));
     }
 
 }
